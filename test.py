@@ -9,22 +9,37 @@ cache_counters = np.full((set_size, memory_blocks//4), None, dtype=object)
 set_counter = np.zeros(shape=(4))
 
 
-# TEST CASE 1
-# loops = 4
-# n_memory_block = 64*loops
-# memory_blocks = [x % 64 for x in range(0, n_memory_block)]
+def test_case_1():
+    loops = 4
+    n_memory_block = 64*loops
+    memory_blocks = [x % 64 for x in range(0, n_memory_block)]
+    return memory_blocks, n_memory_block
 
-# TEST CASE 2
-loops = 1
-n_memory_block = 128*loops
-memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
+def test_case_2():
+    loops = 1
+    n_memory_block = 128*loops
+    memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
+    return memory_blocks, n_memory_block
 
-# TEST CASE 3
+def test_case_3():
+    n = 17
+    sequence = list(range(n))
+    mid_sequence = sequence[1:n-1]
+    sequence += mid_sequence * 2
+    sequence += list(range(n, 2*n))
+    full_sequence = sequence * 4 
+    memory_blocks = full_sequence
+    n_memory_block = len(memory_blocks)
+    return memory_blocks, n_memory_block
+
+# Choose which test case to run
+memory_blocks, n_memory_block = test_case_2()
+
 
 # Calculations
 cache_hit = 0
 cache_miss = 0
-speed = 0.01
+speed = 0.1
 
 # BSA
 for mBlock in memory_blocks:
