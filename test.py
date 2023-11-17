@@ -7,17 +7,24 @@ set_size = 4
 cache = np.full((set_size, memory_blocks//4), None, dtype=object)
 cache_counters = np.full((set_size, memory_blocks//4), None, dtype=object)
 set_counter = np.zeros(shape=(4))
-# print(cache)
-# print(cache_counters)
-print(set_counter)
 
-memory_blocks = [x % 4 for x in range(0, 64)]
-# print(memory_blocks)
+
+# TEST CASE 1
+# loops = 4
+# n_memory_block = 64*loops
+# memory_blocks = [x % 64 for x in range(0, n_memory_block)]
+
+# TEST CASE 2
+loops = 1
+n_memory_block = 128*loops
+memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
+
+# TEST CASE 3
 
 # Calculations
 cache_hit = 0
 cache_miss = 0
-speed = 0.1
+speed = 0.01
 
 # BSA
 for mBlock in memory_blocks:
@@ -72,4 +79,6 @@ for mBlock in memory_blocks:
         print(cache)
         time.sleep(speed)
 
-print(cache_hit)
+cache_miss = n_memory_block - cache_hit
+print("Cache Hit: ", cache_hit)
+print("Cache Miss: ", cache_miss)
