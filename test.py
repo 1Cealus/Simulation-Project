@@ -40,10 +40,18 @@ memory_blocks, n_memory_block = test_case_2()
 cache_hit = 0
 cache_miss = 0
 speed = 0.1
+memory_access_count = 0
+total_memory_access_time = 0
+start_time = time.time()
+
+# Define Cache access time and miss penalty
+C = 1  # cache access time
+M = 10  # miss penalty
 
 # BSA
 for mBlock in memory_blocks:
     set_location = mBlock % 4
+    memory_access_count += 1
 
     # Check if mBlock is already in Cache Set
     if np.isin(mBlock, cache[set_location]):
@@ -94,6 +102,18 @@ for mBlock in memory_blocks:
         print(cache)
         time.sleep(speed)
 
-cache_miss = n_memory_block - cache_hit
+
+cache_miss = memory_access_count - cache_hit
+cache_hit_rate = cache_hit / memory_access_count
+cache_miss_rate = 1 - cache_hit_rate
+
+average_memory_access_time = cache_hit_rate * C + cache_miss_rate * M
+total_memory_access_time = average_memory_access_time * n_memory_block
+
+print("Memory Access Count: ", memory_access_count)
 print("Cache Hit: ", cache_hit)
 print("Cache Miss: ", cache_miss)
+print("Cache Hit Rate: ", cache_hit_rate)
+print("Cache Miss Rate: ", cache_miss_rate)
+print("Average Memory Access Time: ", average_memory_access_time)
+print("Total Memory Access Time: ", total_memory_access_time)
