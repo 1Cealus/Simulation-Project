@@ -5,7 +5,6 @@ import eel
 import tkinter as tk
 
 
-
 """
     CACHE SIMULATOR
 """
@@ -13,11 +12,13 @@ import tkinter as tk
 import numpy as np
 import time as time
 
+
 def test_case_1():
     loops = 4
     n_memory_block = 64*loops
     memory_blocks = [x % 64 for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
+
 
 def test_case_2():
     loops = 1
@@ -25,19 +26,22 @@ def test_case_2():
     memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
 
+
 def test_case_3():
     n = 17
     sequence = list(range(n))
     mid_sequence = sequence[1:n-1]
     sequence += mid_sequence * 2
     sequence += list(range(n, 2*n))
-    full_sequence = sequence * 4 
+    full_sequence = sequence * 4
     memory_blocks = full_sequence
     n_memory_block = len(memory_blocks)
     return memory_blocks, n_memory_block
 
 
 def simulate(memory_block_data, n_memory_block):
+    cache_snapshot = []
+
     memory_blocks = 32
     set_size = 4
     cache = np.full((set_size, memory_blocks//4), None, dtype=object)
@@ -89,6 +93,9 @@ def simulate(memory_block_data, n_memory_block):
             # increment Set Counter
             set_counter[set_location] += 1
 
+            # cache snapshot
+            cache_snapshot.append(cache.tolist())
+
         # REPLACEMENT ALOGIRHTM LRU
         else:
             # Get Least Recently Used Block Index Location from a Set
@@ -100,13 +107,18 @@ def simulate(memory_block_data, n_memory_block):
 
             # Increment Set Counter
             set_counter[set_location] += 1
+
+            # cache snapshot
+            cache_snapshot.append(cache.tolist())
+
     cache_miss = memory_access_count - cache_hit
     cache_hit_rate = cache_hit / memory_access_count
     cache_miss_rate = 1 - cache_hit_rate
 
     average_memory_access_time = cache_hit_rate * C + cache_miss_rate * M
     total_memory_access_time = average_memory_access_time * n_memory_block
-    return cache
+    return cache.tolist(), cache_snapshot, [memory_access_count, cache_hit, cache_miss, cache_hit_rate, cache_miss_rate, average_memory_access_time, total_memory_access_time]
+
 
 """
     CACHE SIMULATOR
@@ -118,6 +130,7 @@ root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
+
 @eel.expose
 def get_data(testcase):
     memory_blocks, n_memory_block = [None, None]
@@ -128,14 +141,18 @@ def get_data(testcase):
         memory_blocks, n_memory_block = test_case_2()
     elif testcase == "3":
         memory_blocks, n_memory_block = test_case_3()
-    return [simulate(memory_blocks, n_memory_block).tolist(), memory_blocks]
+    results = simulate(memory_blocks, n_memory_block)
+
+    return [results[0], memory_blocks, results[1], results[2]]
 
 # Define a function to be called from JavaScript
+
+
 @eel.expose
 def print_hello():
-    print("Hello from Python!")
+    print("Hello from Python!") 
+
 
 # Set the web folder and define the 'start' page
 eel.init('web')
 eel.start('index.html', size=(screen_width // 1.1, screen_height // 1.1))
-

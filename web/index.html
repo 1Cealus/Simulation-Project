@@ -1,37 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <div id="stage">
-        <!-- MEMORY BLOCKS -->
-        <div id="memory">
-            <div id="memory-container"></div>
-        </div>
-
         <!-- CACHE BLOCKS -->
-        <div id="cache"">
-            <div id="cache-container"></div>
+        <div>
+            <p id="identifier">Cache Snapshot Log</p>
+            <textarea id="cache-iterations" cols="60" rows="30" readonly></textarea>
+        </div>
+        <div id="cache-information">
+            <p id="identifier">Cache Memory</p>
+            <div id="cache"">
+                <div id="cache-container">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                            </tr>
+                            <tr>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                            </tr>
+                            <tr>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>  </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div id="cache-control">
-                <button>Prev</button>
-                <span>1/20</span>
-                <button>Next</button>
+                <button class="buttondesign" id="prev-animation" disabled>Prev State</button>
+                <span id="current-snapshot" style="margin-left: 12.5vw;"></span>
+                <button class="buttondesign" id="next-animation" style="float:right" disabled>Next State</button>
+            </div>
+            <div id="cache-stats">
+                <div style="margin-left: 25px;">
+                    <br>
+                    <p>Memory Access Count: </span>
+                    <span id="memory-access-count"></span>
+                    <br>
+                    <span>Cache Hit: </span>
+                    <span id="cache-hit"></span>
+                    <br>
+                    <span>Cache Miss: </span>
+                    <span id="cache-miss"></span>
+                    <br>
+                    <span>Cache Hit Rate: </span>
+                    <span id="cache-hit-rate"></span>
+                    <span>%</span>
+                    <br>
+                    <span>Cache Miss Rate: </span>
+                    <span id="cache-miss-rate"></span>
+                    <span>%</span>
+                    <br>
+                    <span>Average Memory Access Time: </span>
+                    <span id="average-time"></span>
+                    <br>
+                    <span>Total Memory Access Time: </span>
+                    <span id="total-time"></span>
+                    <br>
+                </div>
             </div>
         </div>
+            <div style="display:flex; flex-direction: column;">
+                <p id="identifier" >Controls</p>
+                <select name="test-case" class="buttondesign" id="test-case">
+                    <option value="1" selected>Test Case #1</option>
+                    <option value="2">Test Case #2</option>
+                    <option value="3">Test Case #3</option>
+                </select>
+                <button class="buttondesign" onclick="buttonClick()">Simulate</button>
+                <button class="buttondesign" id="start-animation" disabled>Start Animation</button>
+                <button class="buttondesign" id="pause-animation" disabled>Pause Animation</button>
+                <button class="buttondesign" id="stop-animation" disabled>Stop Animation</button>
+            </div>
     </div>
-    <select name="test-case" id="test-case">
-        <option value="1" selected>Test Case #1</option>
-        <option value="2">Test Case #2</option>
-        <option value="3">Test Case #3</option>
-      </select>
-    <button onclick="buttonClick()">Click me!</button>
-    <span></span>
     <!-- Eel JS must be included at the end of the body -->
     <script type="text/javascript" src="/eel.js"></script>
     <script src="linker.js"></script>
 </body>
+
 </html>

@@ -33,7 +33,7 @@ def test_case_3():
     return memory_blocks, n_memory_block
 
 # Choose which test case to run
-memory_blocks, n_memory_block = test_case_2()
+memory_blocks, n_memory_block = test_case_1()
 
 
 # Calculations

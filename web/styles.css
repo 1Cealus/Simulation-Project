@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: #1e1e1e;
 }
 
 table {
@@ -11,14 +12,106 @@ table {
 }
 
 td {
-    width: 50px;  /* Adjust the width of each square as needed */
-    height: 50px; /* Adjust the height of each square as needed */
-    border: 1px solid black;
+    width: 100px;  /* Adjust the width of each square as needed */
+    height: 100px; /* Adjust the height of each square as needed */
+    border: 1px solid rgb(208, 207, 207);
+    color: white;
+    font-weight: bold;
+    background-color: #272727;
     text-align: center;
     vertical-align: middle;
+}
+
+#identifier {
+    color: rgb(208, 207, 207);
+    font-size: 1.2em;
+}
+
+#stage {
+    display: flex;
+}
+
+#cache-information {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
 }
 
 #cache {
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
+    width: 780px;
+    height: 390px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#cache-iterations {
+    border: 1px solid rgb(208, 207, 207);
+    background-color: #272727;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    color: rgb(208, 207, 207);
+    font-size: 1.2em;
+}
+
+#cache-stats {
+    margin-top: 20px;
+    background-color: #272727;
+    color: rgb(208, 207, 207);
+    font-size: 1.2em;
+    box-shadow: rgb(14, 14, 14) 3px 3px 6px 0px inset, rgba(0, 0, 0, 0.5) -3px -3px 6px 1px inset;
+    width: 100%;
+    height: 33.5%;
+} 
+
+#current-snapshot {
+    text-align: center;
+    color: rgb(208, 207, 207);
+    font-size: 1.2em;
+}
+
+span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+/* CSS */
+.buttondesign {
+    align-items: center;
+    background-color: #232323;
+    border: 1px solid rgb(177, 177, 177);
+    box-sizing: border-box;
+    color: rgb(208, 207, 207);
+    cursor: pointer;
+    display: inline-flex;
+    fill: #000;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: #ffffff23 0px 15px 30px -10px;
+}
+
+.buttondesign:focus {
+    color: #008170;
+}
+
+.buttondesign:hover {
+    border-color: #008170;
+    color: #05b79f;
+    fill: #008170;
+    box-shadow: #005B41 0px 15px 30px -10px;
 }
