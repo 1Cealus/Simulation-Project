@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    width: 50px;  /* Adjust the width of each square as needed */
+    height: 50px; /* Adjust the height of each square as needed */
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#cache {
+    display: flex;
+    flex-direction: column;
+}
