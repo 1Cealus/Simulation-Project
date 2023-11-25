@@ -7,6 +7,11 @@ var currentIndex = 0;
 var isAnimating = false;
 alert("Simulate First before other controls!");
 async function buttonClick() {
+    currentIndex = 0;
+    clearTimeout(animationTimeout);
+    isAnimating = false;
+
+    document.getElementById("current-snapshot").innerHTML = ' ';
     // Get the memory blocks from a textarea (or any other input element)
     let test_case = document.getElementById("test-case").value;
     let n_memory_block_user = parseInt(document.getElementById("n-memory-block").value);
@@ -92,7 +97,7 @@ function animate() {
             isAnimating = true; // Set the flag to true when scheduling an animation
             animationTimeout = setTimeout(function() {
                 animate();
-            }, 500);
+            }, 100);
         }
         currentIndex++;
     }
@@ -100,7 +105,7 @@ function animate() {
 
 function updateCacheDisplay(cacheState, currentValue) {
 
-    document.getElementById('current-snapshot').innerHTML = currentIndex + "/" + cache_snapshot.length
+    document.getElementById('current-snapshot').innerHTML = (currentIndex+1) + "/" + cache_snapshot.length
 
     // Clear the existing cache display
     document.getElementById('cache-container').innerHTML = '';
