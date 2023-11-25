@@ -7,6 +7,13 @@ var currentIndex = 0;
 var isAnimating = false;
 alert("Simulate First before other controls!");
 async function buttonClick() {
+    // Get the memory blocks from a textarea (or any other input element)
+    let test_case = document.getElementById("test-case").value;
+    let n_memory_block_user = parseInt(document.getElementById("n-memory-block").value);
+    console.log("n_memory_block_user:", n_memory_block_user);
+    console.log("Test Case:", test_case);
+    let data = await eel.get_data(test_case, n_memory_block_user)();
+
     var buttons = document.getElementsByClassName("buttondesign");
     for (var i = 0; i < buttons.length; i++) {
         buttons[i].removeAttribute("disabled");
@@ -16,8 +23,6 @@ async function buttonClick() {
     document.getElementById('cache-iterations').value = '';
     document.getElementById('cache-container').innerHTML = '';
 
-    let test_case = document.getElementById("test-case").value;
-    let data = await eel.get_data(test_case)();
 
     cache = data[0];
     memory = data[1];
@@ -87,7 +92,7 @@ function animate() {
             isAnimating = true; // Set the flag to true when scheduling an animation
             animationTimeout = setTimeout(function() {
                 animate();
-            }, 250);
+            }, 500);
         }
         currentIndex++;
     }

@@ -13,22 +13,26 @@ import numpy as np
 import time as time
 
 
-def test_case_1():
+def test_case_1(n_memory_block):
     loops = 4
-    n_memory_block = 64*loops
+    n_memory_block = loops*n_memory_block
     memory_blocks = [x % 64 for x in range(0, n_memory_block)]
+    print("Memory block:", memory_blocks)
+    print("n_mblock:", n_memory_block)
     return memory_blocks, n_memory_block
 
 
-def test_case_2():
+def test_case_2(n_memory_block):
     loops = 1
-    n_memory_block = 128*loops
+    n_memory_block = loops*n_memory_block
     memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
+    print("Memory block:", memory_blocks)
+    print("n_mblock:", n_memory_block)
     return memory_blocks, n_memory_block
 
 
-def test_case_3():
-    n = 17
+def test_case_3(n_memory_block):
+    n = n_memory_block
     sequence = list(range(n))
     mid_sequence = sequence[1:n-1]
     sequence += mid_sequence * 2
@@ -36,6 +40,8 @@ def test_case_3():
     full_sequence = sequence * 4
     memory_blocks = full_sequence
     n_memory_block = len(memory_blocks)
+    print("Memory block:", memory_blocks)
+    print("n_mblock:", n_memory_block)
     return memory_blocks, n_memory_block
 
 
@@ -51,7 +57,7 @@ def simulate(memory_block_data, n_memory_block):
     # Calculations
     cache_hit = 0
     cache_miss = 0
-    speed = 0.1
+    speed = 0.5
     memory_access_count = 0
     total_memory_access_time = 0
     start_time = time.time()
@@ -132,20 +138,25 @@ screen_height = root.winfo_screenheight()
 
 
 @eel.expose
-def get_data(testcase):
+def get_data(testcase, n_memory_block_user):
     memory_blocks, n_memory_block = [None, None]
     if testcase == "1":
-        # Choose which test case to run
-        memory_blocks, n_memory_block = test_case_1()
+        memory_blocks, n_memory_block = test_case_1(n_memory_block_user)
     elif testcase == "2":
-        memory_blocks, n_memory_block = test_case_2()
+        memory_blocks, n_memory_block = test_case_2(n_memory_block_user)
     elif testcase == "3":
-        memory_blocks, n_memory_block = test_case_3()
+        memory_blocks, n_memory_block = test_case_3(n_memory_block_user)
+    else:
+        # Handle unexpected testcase values
+        return "Unexpected testcase value: " + str(testcase)
+
+    # Print memory_blocks and n_memory_block for debugging
+    print("memory_blocks:", memory_blocks)
+    print("n_memory_block:", n_memory_block)
+
     results = simulate(memory_blocks, n_memory_block)
 
     return [results[0], memory_blocks, results[1], results[2]]
-
-# Define a function to be called from JavaScript
 
 
 @eel.expose

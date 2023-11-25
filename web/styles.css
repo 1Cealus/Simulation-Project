@@ -105,6 +105,31 @@ span {
     box-shadow: #ffffff23 0px 15px 30px -10px;
 }
 
+#n-memory-block {
+    align-items: center;
+    background-color: #232323;
+    border: 1px solid rgb(177, 177, 177);
+    box-sizing: border-box;
+    color: rgb(208, 207, 207);
+    display: inline-flex;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: #ffffff23 0px 15px 30px -10px;
+}
+
 .buttondesign:focus {
     color: #008170;
 }
