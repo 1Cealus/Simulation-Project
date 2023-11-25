@@ -4,6 +4,7 @@ var cache_snapshot = null;
 
 var animationTimeout;
 var currentIndex = 0;
+var isAnimating = false;
 alert("Simulate First before other controls!");
 async function buttonClick() {
     var buttons = document.getElementsByClassName("buttondesign");
@@ -71,9 +72,6 @@ async function buttonClick() {
 }
 
 
-// Rest of your code...
-
-
 //  ANIMATION
 var currentIndex = 0; // Keep track of the current index in cache_snapshot array
 var animationTimeout; // Variable to store the timeout ID for the animation
@@ -85,7 +83,12 @@ function animate() {
         updateCacheDisplay(cache_snapshot[currentIndex], memory[currentIndex]);
 
         // Call animate function recursively with a delay of 0.5 seconds
-        animationTimeout = setTimeout(animate, 250);
+        if (!isPaused) { // Check if the animation is not paused
+            isAnimating = true; // Set the flag to true when scheduling an animation
+            animationTimeout = setTimeout(function() {
+                animate();
+            }, 250);
+        }
         currentIndex++;
     }
 }
@@ -124,7 +127,6 @@ function updateCacheDisplay(cacheState, currentValue) {
 }
 
 // Call animate function after button click
-// Assuming you have a button with id "start-animation" to trigger the animation
 document.getElementById("start-animation").addEventListener("click", function () {
     currentIndex = 0; // Reset the current index
     isPaused = false; // Reset pause state
@@ -147,16 +149,26 @@ document.getElementById("pause-animation").addEventListener("click", function ()
 
 // Next Button
 document.getElementById("next-animation").addEventListener("click", function () {
-    if (currentIndex < cache_snapshot.length - 1) {
+    if (!isAnimating && currentIndex < cache_snapshot.length - 1) {
         currentIndex++;
         updateCacheDisplay(cache_snapshot[currentIndex], memory[currentIndex]);
+    }
+    if (isAnimating && currentIndex < cache_snapshot.length - 1){
+        isAnimating=false;
+        updateCacheDisplay(cache_snapshot[currentIndex], memory[currentIndex])
     }
 });
 
 // Previous Button
 document.getElementById("prev-animation").addEventListener("click", function () {
-    if (currentIndex > 0) {
+    if (!isAnimating && currentIndex > 0) {
         currentIndex--;
         updateCacheDisplay(cache_snapshot[currentIndex], memory[currentIndex]);
+    }
+    if (isAnimating && currentIndex > 0){
+        currentIndex--;
+        currentIndex--;
+        isAnimating=false;
+        updateCacheDisplay(cache_snapshot[currentIndex], memory[currentIndex])
     }
 });
