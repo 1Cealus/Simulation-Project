@@ -14,6 +14,7 @@ import time as time
 
 
 def test_case_1(n_memory_block):
+    sequential = (n_memory_block*2)
     loops = 4
     n_memory_block = loops*n_memory_block
     memory_blocks = [x % 64 for x in range(0, n_memory_block)]
