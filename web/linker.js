@@ -120,9 +120,9 @@ function updateCacheDisplay(cacheState, currentValue) {
                 cell.style.backgroundColor = "#008170";
                 cell.style.boxShadow = '0px 50px 50px #005B41';
             }
-
             cell.appendChild(document.createTextNode(cacheState[i][j]));
             row.appendChild(cell);
+            console.log()
         }
         tbody.appendChild(row);
     }

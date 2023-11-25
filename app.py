@@ -71,6 +71,7 @@ def simulate(memory_block_data, n_memory_block):
     for mBlock in memory_block_data:
         set_location = mBlock % 4
         memory_access_count += 1
+        print("Current: ", mBlock)
 
         # Check if mBlock is already in Cache Set
         if np.isin(mBlock, cache[set_location]):
@@ -86,10 +87,9 @@ def simulate(memory_block_data, n_memory_block):
             cache_hit += 1
 
             # Next Memory Block
+            cache_snapshot.append(cache.tolist())
             continue
-
-        # Check if Set Location is full
-        if None in cache[set_location]:
+        elif None in cache[set_location]: # Check if Set Location is full
             # Find First None and Replace
             index_of_none = np.where(cache[set_location] == None)[0][0]
             cache[set_location][index_of_none] = mBlock
@@ -102,9 +102,7 @@ def simulate(memory_block_data, n_memory_block):
 
             # cache snapshot
             cache_snapshot.append(cache.tolist())
-
-        # REPLACEMENT ALOGIRHTM LRU
-        else:
+        else: # REPLACEMENT ALOGIRHTM LRU
             # Get Least Recently Used Block Index Location from a Set
             LRU_sBlock = np.argmin(cache_counters[set_location])
             cache[set_location][LRU_sBlock] = mBlock
