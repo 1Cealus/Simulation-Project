@@ -14,21 +14,24 @@ import time as time
 
 
 def test_case_1(n_memory_block):
-    sequential = (n_memory_block*2)
     loops = 4
+    modulo = None
+    if n_memory_block > 64:
+        modulo = 64
+        memory_blocks = 64
     n_memory_block = loops*n_memory_block
-    memory_blocks = [x % 64 for x in range(0, n_memory_block)]
-    print("Memory block:", memory_blocks)
-    print("n_mblock:", n_memory_block)
+    memory_blocks = [x % modulo for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
 
 
 def test_case_2(n_memory_block):
     loops = 1
+
+    if n_memory_block >= 4*32:
+        n_memory_block = 4*32
+    
     n_memory_block = loops*n_memory_block
-    memory_blocks = [np.random.randint(100) for x in range(0, n_memory_block)]
-    print("Memory block:", memory_blocks)
-    print("n_mblock:", n_memory_block)
+    memory_blocks = [np.random.randint(128) for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
 
 
@@ -41,8 +44,6 @@ def test_case_3(n_memory_block):
     full_sequence = sequence * 4
     memory_blocks = full_sequence
     n_memory_block = len(memory_blocks)
-    print("Memory block:", memory_blocks)
-    print("n_mblock:", n_memory_block)
     return memory_blocks, n_memory_block
 
 
@@ -71,7 +72,6 @@ def simulate(memory_block_data, n_memory_block):
     for mBlock in memory_block_data:
         set_location = mBlock % 4
         memory_access_count += 1
-        print("Current: ", mBlock)
 
         # Check if mBlock is already in Cache Set
         if np.isin(mBlock, cache[set_location]):
@@ -149,18 +149,9 @@ def get_data(testcase, n_memory_block_user):
         # Handle unexpected testcase values
         return "Unexpected testcase value: " + str(testcase)
 
-    # Print memory_blocks and n_memory_block for debugging
-    print("memory_blocks:", memory_blocks)
-    print("n_memory_block:", n_memory_block)
-
     results = simulate(memory_blocks, n_memory_block)
 
     return [results[0], memory_blocks, results[1], results[2]]
-
-
-@eel.expose
-def print_hello():
-    print("Hello from Python!") 
 
 
 # Set the web folder and define the 'start' page

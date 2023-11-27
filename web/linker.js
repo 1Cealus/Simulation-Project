@@ -15,8 +15,6 @@ async function buttonClick() {
     // Get the memory blocks from a textarea (or any other input element)
     let test_case = document.getElementById("test-case").value;
     let n_memory_block_user = parseInt(document.getElementById("n-memory-block").value);
-    console.log("n_memory_block_user:", n_memory_block_user);
-    console.log("Test Case:", test_case);
     let data = await eel.get_data(test_case, n_memory_block_user)();
 
     var buttons = document.getElementsByClassName("buttondesign");
@@ -127,7 +125,6 @@ function updateCacheDisplay(cacheState, currentValue) {
             }
             cell.appendChild(document.createTextNode(cacheState[i][j]));
             row.appendChild(cell);
-            console.log()
         }
         tbody.appendChild(row);
     }
