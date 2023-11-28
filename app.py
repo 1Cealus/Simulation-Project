@@ -26,11 +26,7 @@ def test_case_1(n_memory_block):
 
 
 def test_case_2(n_memory_block):
-    loops = 1
-
-    if n_memory_block >= 4*32:
-        n_memory_block = 4*32
-    
+    loops = 1    
     n_memory_block = loops*n_memory_block*4
     memory_blocks = [np.random.randint(n_memory_block) for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
