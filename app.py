@@ -15,7 +15,7 @@ import time as time
 
 def test_case_1(n_memory_block):
     loops = 4
-    modulo = None
+    modulo = n_memory_block
     if n_memory_block > 64:
         modulo = 64
         memory_blocks = 64
@@ -38,9 +38,9 @@ def test_case_2(n_memory_block):
 def test_case_3(n_memory_block):
     n = n_memory_block
     sequence = list(range(n))
-    mid_sequence = sequence[1:n-1]
-    sequence += mid_sequence * 2
-    sequence += list(range(n, 2*n))
+    mid_sequence = sequence[1:n-2]
+    sequence += mid_sequence
+    sequence += list(range(n-2, 2*n))
     full_sequence = sequence * 4
     memory_blocks = full_sequence
     n_memory_block = len(memory_blocks)
