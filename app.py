@@ -15,6 +15,7 @@ import time as time
 
 def test_case_1(n_memory_block):
     loops = 4
+    n_memory_block=n_memory_block*2
     modulo = n_memory_block
     if n_memory_block > 64:
         modulo = 64
@@ -30,8 +31,8 @@ def test_case_2(n_memory_block):
     if n_memory_block >= 4*32:
         n_memory_block = 4*32
     
-    n_memory_block = loops*n_memory_block
-    memory_blocks = [np.random.randint(128) for x in range(0, n_memory_block)]
+    n_memory_block = loops*n_memory_block*4
+    memory_blocks = [np.random.randint(n_memory_block) for x in range(0, n_memory_block)]
     return memory_blocks, n_memory_block
 
 
