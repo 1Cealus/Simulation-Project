@@ -37,15 +37,16 @@ def test_case_2(n_memory_block):
 
 def test_case_3(n_memory_block):
     n = n_memory_block
-    sequence = list(range(n))
-    mid_sequence = sequence[1:n-2]
+    sequence = list(range(n-1))
+    sequence2 = list(range(n))
+    mid_sequence = sequence2[1:n]
     sequence += mid_sequence
-    sequence += list(range(n-2, 2*n))
+    sequence += list(range(n, 2*n))
+
     full_sequence = sequence * 4
     memory_blocks = full_sequence
     n_memory_block = len(memory_blocks)
     return memory_blocks, n_memory_block
-
 
 def simulate(memory_block_data, n_memory_block):
     cache_snapshot = []
